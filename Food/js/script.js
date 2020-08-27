@@ -2,8 +2,8 @@
 window.addEventListener('DOMContentLoaded', () => {
     //Tabs
     const tabs = document.querySelectorAll(".tabheader__item"),
-          tabsContent = document.querySelectorAll(".tabcontent"),
-          tabsParent = document.querySelector(".tabheader__items");
+        tabsContent = document.querySelectorAll(".tabcontent"),
+        tabsParent = document.querySelector(".tabheader__items");
 
     function hideTabContent() {
         tabsContent.forEach(item => {
@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
         tabs.forEach(item => {
             item.classList.remove('tabheader__item_active');
 
-        })
+        });
     }
 
     function showTabContent(i = 0) {
@@ -29,9 +29,9 @@ window.addEventListener('DOMContentLoaded', () => {
     tabsParent.addEventListener('click', (e) => {
         const target = e.target;
 
-        if(target && target.classList.contains('tabheader__item')){
+        if (target && target.classList.contains('tabheader__item')) {
             tabs.forEach((item, i) => {
-                if(target == item){
+                if (target == item) {
                     hideTabContent();
                     showTabContent(i);
                 }
@@ -45,10 +45,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
-              days = Math.floor(t / (1000 * 60 * 60 * 24)),
-              hours = Math.floor((t / (1000 * 60 * 60) % 24)),
-              minutes = Math.floor((t / 1000 / 60) % 60),
-              seconds = Math.floor((t / 1000) % 60);
+            days = Math.floor(t / (1000 * 60 * 60 * 24)),
+            hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+            minutes = Math.floor((t / 1000 / 60) % 60),
+            seconds = Math.floor((t / 1000) % 60);
 
         return {
             'total': t,
@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     function getZero(num) {
-        if (num >= 0 && num <10) {
+        if (num >= 0 && num < 10) {
             return `0${num}`;
         } else {
             return num;
@@ -71,11 +71,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function setClock(selector, endtime) {
         const timer = document.querySelector(selector),
-              days = timer.querySelector('#days'),
-              hours = timer.querySelector('#hours'),
-              minutes = timer.querySelector('#minutes'),
-              seconds = timer.querySelector('#seconds'),
-              timeInterval = setInterval(updateClock, 1000);
+            days = timer.querySelector('#days'),
+            hours = timer.querySelector('#hours'),
+            minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updateClock, 1000);
 
         updateClock();
 
@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             if (t.total <= 0) {
                 clearInterval(timeInterval);
-            } 
+            }
         }
 
     }
@@ -99,8 +99,8 @@ window.addEventListener('DOMContentLoaded', () => {
     //Modal
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal'),
-          modalCloseBtn = document.querySelector('[data-close]');
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('[data-close]');
 
     function openModal() {
         modal.classList.add('show');
@@ -134,12 +134,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.code === "Escape" && modal.classList.contains('show')){
+        if (e.code === "Escape" && modal.classList.contains('show')) {
             closeModal();
-        } 
+        }
     });
 
-    //const modalTimerId = setTimeout(openModal, 5000);
+    const modalTimerId = setTimeout(openModal, 5000);
 
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
@@ -153,7 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //Используем классы для карточек
 
     class MenuCard {
-        constructor(src, alt, title, descr, price, parentSelector, ...classes){
+        constructor(src, alt, title, descr, price, parentSelector, ...classes) {
             this.src = src;
             this.alt = alt;
             this.title = title;
@@ -171,11 +171,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
         render() {
             const element = document.createElement('div');
-            if (this.classes.length == 0 ) {
+            if (this.classes.length == 0) {
                 this.element = 'menu__item';
                 element.classList.add(this.element);
-            }else{
-            this.classes.forEach(className => element.classList.add(className));
+            } else {
+                this.classes.forEach(className => element.classList.add(className));
             }
             element.innerHTML = `
                 <img src=${this.src} alt=${this.alt}>
@@ -190,7 +190,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.parent.append(element);
         }
     }
-    
+
     new MenuCard(
         "img/tabs/vegy.jpg",
         "vegy",
@@ -208,7 +208,7 @@ window.addEventListener('DOMContentLoaded', () => {
         10,
         '.menu .container'
     ).render();
-    
+
     new MenuCard(
         "img/tabs/post.jpg",
         "post",
@@ -248,12 +248,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const object = {};
 
-            formData.forEach(function(value, key) {
+            formData.forEach(function (value, key) {
                 object[key] = value;
             });
 
             const json = JSON.stringify(object);
-            
+
             request.send(json);
 
             request.addEventListener("load", () => {
@@ -264,7 +264,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         statusMessage.remove();
                     }, 2000);
-                }else {
+                } else {
                     statusMessage.textContent = message.failure;
                 }
             });
